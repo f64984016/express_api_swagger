@@ -21,9 +21,21 @@ router.get('/', (req, res) => {
 
 // Create page
 router.post('/', (req, res) => {
+    const {name, url} = req.body;
+    // establish new object    
+    const newPage = {
+        name,
+        url,
+        id:uuidv4()
+    }
+    //  add object to array
+    pages.push(newPage);
+
+    // respond
     res.send(
-        {status: 'success'}
-    )
+        {status: 'success',
+         page: newPage   
+    })
 });
 
 module.exports = router;
