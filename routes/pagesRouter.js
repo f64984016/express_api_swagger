@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { v4: uuidv4 } = require('uuid');
+var pageModel = require('../models/pagesModel');
 
 //pages
 const pages = [
@@ -12,30 +13,23 @@ const pages = [
 
 // Get all pages
 router.get('/', (req, res) => {
-    res.send(
-        {
-            status: 'success',
-            pages
-        })
+    const pages = pageModel.getAll();
+    res.send(pages);
 });
 
 // Create page
 router.post('/', (req, res) => {
-    const {name, url} = req.body;
-    // establish new object    
+    // Validation
+    
+    
     const newPage = {
-        name,
-        url,
-        id:uuidv4()
-    }
-    //  add object to array
-    pages.push(newPage);
+        name: req.body.name,
+        url: req.body.url
+    };
 
-    // respond
-    res.send(
-        {status: 'success',
-         page: newPage   
-    })
+    const page = pageModel.create(newPage);
+
+    res.send(page);
 });
 
 module.exports = router;
