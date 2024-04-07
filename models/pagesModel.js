@@ -15,11 +15,14 @@ class PageModel {
   }
 
   create(page) {
+    // establish new object 
     const newPage = {
       ...page,
       id: uuidv4(),
     };
+    //  add object to array
     this.pages.push(newPage);
+    // response
     return newPage;
   }
 }
