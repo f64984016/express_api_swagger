@@ -29,6 +29,10 @@ class PageModel {
     // response
     return newPage;
   }
+
+  put(id) {
+    console.log(this.pages.indexOf({id: id}));
+  }
 }
 
 module.exports = new PageModel();

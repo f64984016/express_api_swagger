@@ -12,7 +12,7 @@ router.get('/:id', pageController.getPagesById);
 router.post('/', pageController.createPage);
 
 // Update page
-router.put('/:id', (req, res) => { res.status(500).send('NotImplement Exception')});
+router.put('/:id', pageController.putPage);
 
 // Delete page
 router.delete('/:id', (req, res) => { res.status(500).send('NotImplement Exception')});

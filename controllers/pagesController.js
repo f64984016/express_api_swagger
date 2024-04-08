@@ -40,3 +40,13 @@ exports.createPage = (req, res) => {
 
     res.send(page);
 };
+
+exports.putPage = (req, res) => {
+    const { id } = req.params;
+    const page = pageModel.put(id);
+
+    if (!page) {
+        return res.status(404).send('Page update fail');
+    }
+    res.send(page);
+};
