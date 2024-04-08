@@ -6,6 +6,16 @@ exports.getAllPages = (req, res) => {
     res.send(pages);
 };
 
+exports.getPagesById = (req, res) => {
+    const { id } = req.params;
+    const page = pageModel.getById(id);
+
+    if (!page) {
+        return res.status(404).send('Page not found');
+    }
+    res.send(page);
+};
+
 exports.createPage = (req, res) => {
     // Validation
     if (!req.body.name) {

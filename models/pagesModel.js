@@ -14,6 +14,10 @@ class PageModel {
     return this.pages;
   }
 
+  getById(id) {
+    return this.pages.find((page) => page.id === id);
+  }
+
   create(page) {
     // establish new object 
     const newPage = {

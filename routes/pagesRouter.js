@@ -6,7 +6,7 @@ const pageController = require('../controllers/pagesController');
 router.get('/', pageController.getAllPages);
 
 // Get one page
-router.get('/:id', (req, res) => { res.status(500).send('NotImplement Exception')});
+router.get('/:id', pageController.getPagesById);
 
 // Create page
 router.post('/', pageController.createPage);
