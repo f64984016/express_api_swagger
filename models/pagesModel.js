@@ -30,8 +30,18 @@ class PageModel {
     return newPage;
   }
 
-  put(id) {
-    console.log(this.pages.indexOf({id: id}));
+  put(id, body) {
+    const oldPage = this.pages.find((obj) => obj['id'] === id);
+    const index = this.pages.indexOf(oldPage);
+
+    const newPage = {
+      ...body,
+      id: id
+    }
+
+    this.pages.splice(index, 0, newPage);
+
+    return newPage;
   }
 }
 

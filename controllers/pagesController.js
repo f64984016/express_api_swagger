@@ -42,9 +42,12 @@ exports.createPage = (req, res) => {
 };
 
 exports.putPage = (req, res) => {
-    const { id } = req.params;
-    const page = pageModel.put(id);
+    // Validation
 
+    
+    const { id } = req.params;
+    const page = pageModel.put(id, req.body);
+    
     if (!page) {
         return res.status(404).send('Page update fail');
     }
