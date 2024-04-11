@@ -35,12 +35,14 @@ class PageModel {
     const index = this.pages.indexOf(oldPage);
 
     const newPage = {
-      ...body,
-      id: id
+      id: id,
+      ...body
     }
 
-    this.pages.splice(index, 0, newPage);
+    //
+    const result = this.pages.splice(index, 1, newPage);
 
+    // respond
     return newPage;
   }
 }
