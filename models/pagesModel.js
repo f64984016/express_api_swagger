@@ -31,18 +31,18 @@ class PageModel {
   }
 
   put(id, body) {
+    // find exist page item
     const oldPage = this.pages.find((obj) => obj['id'] === id);
+    // find index of page item
     const index = this.pages.indexOf(oldPage);
-
+    // Create New Page Obj
     const newPage = {
       id: id,
       ...body
     }
-
-    //
+    // Update Item
     const result = this.pages.splice(index, 1, newPage);
-
-    // respond
+    // Response Updated Item
     return newPage;
   }
 
@@ -51,10 +51,8 @@ class PageModel {
     const Page = this.pages.find((obj) => obj['id'] === id);
     // find index of page item
     const index = this.pages.indexOf(Page);
-
     // remove item
     this.pages.splice(index, 1);
-
     // return item removed
     return Page;
   }

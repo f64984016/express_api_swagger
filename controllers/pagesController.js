@@ -55,33 +55,31 @@ exports.putPage = (req, res) => {
     if (typeof req.body.url !== 'string' || req.body.url.charAt(0) !== '/') {
         return res.status(400).send('url 欄位格式錯誤');
     }
-
+    // Retrieval id from querystring
     const { id } = req.params;
+    // Get Obj
     const page1 = pageModel.getById(id);
-
+    // Check whether Obj exist or not
     if (!page1) {
         return res.status(404).send('查無該筆資料');
     }
-
+    // Modify Obj
     const page2 = pageModel.put(id, req.body);
-
+    // Response
     res.send(page2);
 };
 
 exports.deletePage = (req, res) => {
-    // Retrival id from querystring
+    // Retrieval id from querystring
     const { id } = req.params;
     // Get Exist Obj
     const page1 = pageModel.getById(id);
-
-    // Check whether Obj is existing
+    // Check whether Obj exist or not
     if (!page1) {
         return res.status(404).send('查無該筆資料');
     } 
-
     // delete item from array
     const pageResult = pageModel.delete(id);
-
     //Response Removed Item
     res.send(pageResult);
 };
