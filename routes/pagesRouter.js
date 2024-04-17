@@ -22,7 +22,27 @@ router.get(
 router.get('/:id', pageController.getPagesById);
 
 // Create page
-router.post('/', pageController.createPage);
+router.post('/',
+    /* 	#swagger.tags = ['Page']
+        #swagger.description = '新增 page' */
+    /*	#swagger.parameters['obj'] = {
+        in: 'body',
+        description: 'Page內容',
+        required: true,
+        schema: { 
+            "name": "這是顯示名稱",
+            "url": "這是路由"            
+         }
+    } */
+    /* #swagger.responses[200] = { 
+      schema: {
+            "id": "fda7cb56-84d0-4b3b-accf-8fdf1e56257d",
+            "name": "Home",
+            "url": "/"
+        }
+     } */
+ pageController.createPage
+);
 
 // Update page
 router.put('/:id', pageController.putPage);
