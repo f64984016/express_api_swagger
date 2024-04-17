@@ -15,6 +15,6 @@ router.post('/', pageController.createPage);
 router.put('/:id', pageController.putPage);
 
 // Delete page
-router.delete('/:id', (req, res) => { res.status(500).send('NotImplement Exception')});
+router.delete('/:id', pageController.deletePage);
 
 module.exports = router;

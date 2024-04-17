@@ -45,6 +45,19 @@ class PageModel {
     // respond
     return newPage;
   }
+
+  delete(id) {
+    // find exist page item
+    const Page = this.pages.find((obj) => obj['id'] === id);
+    // find index of page item
+    const index = this.pages.indexOf(Page);
+
+    // remove item
+    this.pages.splice(index, 1);
+
+    // return item removed
+    return Page;
+  }
 }
 
 module.exports = new PageModel();
