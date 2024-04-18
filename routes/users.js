@@ -55,6 +55,27 @@ router.post('/login',async(req, res) => {
   });
 });
 
-// 3.AuthenticateUser
+// 3.Authentication
+router.get('/profile', (req, res) => {
+  const token = req.headers['authorization'];
+  // 3-1 Verify whether request contain token 
+  if (!token) {
+    return res.status(401).send({
+      error: "No sign in"
+    });
+  }
+  // 3-2 Authentication
+  jwt.verify(token, key, (err, user) => {
+    if (err) {
+      return res.status(403).send({
+        error: "Auth fail."
+      });      
+    }
+    res.send({
+      message: "Success",
+      user
+    });
+  });
+});
 
 module.exports = router;
