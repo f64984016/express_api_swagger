@@ -1,27 +1,18 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const key = "MYDEMOKEY";
-
-const users = {
-    "f64984016@mail.com":{
-      "username": "rick",
-      "password": ""
-    }
-  };
+const userModel = require('../models/usersModel');
 
 exports.signup = async(req, res) => {
     const {email, username, password} = req.body;
     // Validation
-    if(users[email]) {
+    if(userModel.getByEmail(email)) {
       res.status(400).send({message: 'User already exist.'});
     }
     // 1-1 bcrypt password
     const hashpassword = await bcrypt.hash(password, 10)
     // 1-2 Password Storage
-    users[email] = {
-      password: hashpassword,
-      username
-    };
+    userModel.create(email, username, hashpassword);
     // 1-3 Response
     res.status(201).send({message:'Register Successfully!'});
 };
@@ -29,7 +20,7 @@ exports.signup = async(req, res) => {
 exports.login = async(req, res) => {
     const {email, password} = req.body;
     // 2-1 Verify User Exist
-    const user = users[email];
+    const user = userModel.getByEmail(email);
     if (!user) {
       return res.status(401).send({error: 'User Not Found.'});
     }
