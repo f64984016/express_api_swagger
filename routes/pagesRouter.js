@@ -32,13 +32,30 @@ router.get(
 );
 
 // Get one page
-router.get('/:id', catchError(pageController.getPagesById));
+router.get('/:id',
+    /* 	#swagger.tags = ['Page']
+        #swagger.description = '取得 pages By id' */ 
+    /*  #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'Page ID.',
+            required: true,
+            type: 'string'
+        }*/
+    /*  #swagger.responses[200] = { 
+        schema: [
+            {
+                "id": "fda7cb56-84d0-4b3b-accf-8fdf1e56257d",
+                "name": "Home",
+                "url": "/"
+            }]
+        } */
+        catchError(pageController.getPagesById));
 
 // Create page
 router.post('/',
     /* 	#swagger.tags = ['Page']
         #swagger.description = '新增 page' */
-    /*	#swagger.parameters['obj'] = {
+    /*	#swagger.parameters['body'] = {
         in: 'body',
         description: 'Page內容',
         required: true,
