@@ -2,6 +2,19 @@ var express = require('express');
 var router = express.Router();
 const pageController = require('../controllers/pagesController');
 
+const catchError = (asyncFn) => {
+    return (req, res, next) => {
+      asyncFn(req, res, next)
+        .catch((err) => {
+          console.log('錯誤捕捉:', err)
+          res.status(500)
+            .send({
+              message: '伺服器錯誤'
+            })
+        }) // Promise
+    };
+  }
+
 // Get all pages
 router.get(
     '/',
@@ -15,11 +28,11 @@ router.get(
             "url": "/"
         }]
      } */
-    pageController.getAllPages
+    catchError(pageController.getAllPages)
 );
 
 // Get one page
-router.get('/:id', pageController.getPagesById);
+router.get('/:id', catchError(pageController.getPagesById));
 
 // Create page
 router.post('/',
@@ -41,13 +54,13 @@ router.post('/',
             "url": "/"
         }
      } */
- pageController.createPage
+     catchError(pageController.createPage)
 );
 
 // Update page
-router.put('/:id', pageController.putPage);
+router.put('/:id', catchError(pageController.putPage));
 
 // Delete page
-router.delete('/:id', pageController.deletePage);
+router.delete('/:id', catchError(pageController.deletePage));
 
 module.exports = router;

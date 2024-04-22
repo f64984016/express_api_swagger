@@ -1,12 +1,12 @@
 var pageModel = require('../models/pagesModel');
 
 // Controller 內的 CRUD 方法
-exports.getAllPages = (req, res) => {
+exports.getAllPages = async (req, res) => {
     const pages = pageModel.getAll();
     res.send(pages);
 };
 
-exports.getPagesById = (req, res) => {
+exports.getPagesById = async (req, res) => {
     const { id } = req.params;
     const page = pageModel.getById(id);
 
@@ -16,7 +16,7 @@ exports.getPagesById = (req, res) => {
     res.send(page);
 };
 
-exports.createPage = (req, res) => {
+exports.createPage = async (req, res) => {
     // Validation
     if (!req.body.name) {
         res.status(400).send('缺少 name 欄位');
@@ -41,7 +41,7 @@ exports.createPage = (req, res) => {
     res.send(page);
 };
 
-exports.putPage = (req, res) => {
+exports.putPage = async (req, res) => {
     // Validation
     if (!req.body.name) {
         res.status(400).send('缺少 name 欄位');
@@ -69,7 +69,7 @@ exports.putPage = (req, res) => {
     res.send(page2);
 };
 
-exports.deletePage = (req, res) => {
+exports.deletePage = async (req, res) => {
     // Retrieval id from querystring
     const { id } = req.params;
     // Get Exist Obj
