@@ -44,7 +44,6 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
             "schema": {
               "type": "object",
               "properties": {
@@ -56,10 +55,10 @@
               "xml": {
                 "name": "main"
               }
-            }
+            },
+            "description": "Created"
           },
           "400": {
-            "description": "Bad Request",
             "schema": {
               "type": "object",
               "properties": {
@@ -71,7 +70,11 @@
               "xml": {
                 "name": "main"
               }
-            }
+            },
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -105,7 +108,6 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
             "schema": {
               "type": "object",
               "properties": {
@@ -121,10 +123,10 @@
               "xml": {
                 "name": "main"
               }
-            }
+            },
+            "description": "OK"
           },
           "401": {
-            "description": "Unauthorized",
             "schema": {
               "type": "object",
               "properties": {
@@ -136,7 +138,11 @@
               "xml": {
                 "name": "main"
               }
-            }
+            },
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -147,16 +153,8 @@
           "User"
         ],
         "description": "認證",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
-            "description": "OK",
             "schema": {
               "type": "object",
               "properties": {
@@ -185,10 +183,10 @@
               "xml": {
                 "name": "main"
               }
-            }
+            },
+            "description": "OK"
           },
           "401": {
-            "description": "Unauthorized",
             "schema": {
               "type": "object",
               "properties": {
@@ -200,10 +198,10 @@
               "xml": {
                 "name": "main"
               }
-            }
+            },
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
             "schema": {
               "type": "object",
               "properties": {
@@ -215,7 +213,11 @@
               "xml": {
                 "name": "main"
               }
-            }
+            },
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
