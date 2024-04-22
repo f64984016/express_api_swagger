@@ -13,22 +13,30 @@
   "paths": {
     "/users/signup": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "註冊",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "description": "註冊資訊",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "電子郵件"
                 },
                 "username": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "使用者名稱"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "密碼"
                 }
               }
             }
@@ -36,29 +44,60 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Register Successfully!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User already exist."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/users/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "登入",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "description": "登入資訊",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "電子郵件"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "密碼"
                 }
               }
             }
@@ -66,17 +105,48 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "token的內容"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Login Error."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/users/profile": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "description": "認證",
         "parameters": [
           {
             "name": "authorization",
@@ -86,13 +156,66 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "電子郵件地址"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "使用者名稱"
+                    },
+                    "iat": {
+                      "type": "number",
+                      "example": 123456
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "No sign in"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "403": {
-            "description": "Forbidden"
+            "description": "Forbidden",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Auth fail"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
@@ -239,32 +362,105 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Page"
+        ],
+        "description": "更新 pages",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Page ID."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Page內容",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "這是顯示名稱"
+                },
+                "url": {
+                  "type": "string",
+                  "example": "這是路由"
+                }
+              }
+            }
           }
         ],
         "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "fda7cb56-84d0-4b3b-accf-8fdf1e56257d"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Home"
+                },
+                "url": {
+                  "type": "string",
+                  "example": "/"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Page"
+        ],
+        "description": "刪除 pages",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Page ID."
           }
         ],
         "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "fda7cb56-84d0-4b3b-accf-8fdf1e56257d"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Home"
+                },
+                "url": {
+                  "type": "string",
+                  "example": "/"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
           "500": {
             "description": "Internal Server Error"
           }
