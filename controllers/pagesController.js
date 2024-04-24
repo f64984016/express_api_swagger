@@ -73,13 +73,13 @@ exports.deletePage = async (req, res) => {
     // Retrieval id from querystring
     const { id } = req.params;
     // Get Exist Obj
-    const page1 = pageModel.getById(id);
+    const page1 = await pageModel.getById(id);
     // Check whether Obj exist or not
-    if (!page1) {
+    if (page1.length != 1) {
         return res.status(404).send({error: '查無該筆資料'});
     } 
     // delete item from array
-    const pageResult = pageModel.delete(id);
-    //Response Removed Item
-    res.send(pageResult);
+    const pageResult = await pageModel.delete(id);
+    //Response
+    res.send({deleteCount: pageResult});
 };

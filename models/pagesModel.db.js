@@ -74,15 +74,17 @@ class PageModel {
     return updateResult;
   }
 
-  delete(id) {
-    // find exist page item
-    const Page = this.pages.find((obj) => obj['id'] === id);
-    // find index of page item
-    const index = this.pages.indexOf(Page);
-    // remove item
-    this.pages.splice(index, 1);
-    // return item removed
-    return Page;
+  async delete(id) {
+    // Use connect method to connect to the server
+    await this.client.connect();
+    console.log('Connected successfully to server');
+    // get pages collection
+    const collection = this.client.db(this.dbName).collection(this.collectionName);
+    // delete one
+    const deleteResult = await collection.deleteMany({ _id: new ObjectId(id) });
+    console.log('Deleted documents =>', deleteResult);
+    // Response
+    return deleteResult.deletedCount;
   }
 }
 
