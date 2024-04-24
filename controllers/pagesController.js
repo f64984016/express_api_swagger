@@ -8,9 +8,9 @@ exports.getAllPages = async (req, res) => {
 
 exports.getPagesById = async (req, res) => {
     const { id } = req.params;
-    const page = pageModel.getById(id);
-
-    if (!page) {
+    const page = await pageModel.getById(id);
+    
+    if (page.length != 1) {
         return res.status(404).send({error: 'Page not found'});
     }
     res.send(page);

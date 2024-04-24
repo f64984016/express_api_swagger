@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 
 class PageModel { 
   constructor() {
@@ -23,17 +23,25 @@ class PageModel {
     // Use connect method to connect to the server
     await this.client.connect();
     console.log('Connected successfully to server');
-    // get pages collection
+    // get all pages collection
     const collection = this.client.db(this.dbName).collection(this.collectionName);
-    // 
     const findResult = await collection.find({}).toArray();
     console.log('Found documents =>', findResult);
-    
+    // response    
     return findResult;
   }
 
-  getById(id) {
-    return this.pages.find((page) => page.id === id);
+  async getById(id) {
+    // Use connect method to connect to the server
+    await this.client.connect();
+    console.log('Connected successfully to server');
+    // get pages collection
+    const collection = this.client.db(this.dbName).collection(this.collectionName);
+    // get page by id 
+    const filteredDocs = await collection.find({ _id: new ObjectId(id) }).toArray();
+    console.log('Found documents filtered by { _id: ObjectId(id) } =>', filteredDocs);
+    // Response
+    return filteredDocs;
   }
 
   async create(page) {
