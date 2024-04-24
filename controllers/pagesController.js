@@ -58,13 +58,13 @@ exports.putPage = async (req, res) => {
     // Retrieval id from querystring
     const { id } = req.params;
     // Get Obj
-    const page1 = pageModel.getById(id);
+    const page1 = await pageModel.getById(id);
     // Check whether Obj exist or not
-    if (!page1) {
+    if (page.length != 1) {
         return res.status(404).send({error: '查無該筆資料'});
     }
     // Modify Obj
-    const page2 = pageModel.put(id, req.body);
+    const page2 = await pageModel.put(id, req.body);
     // Response
     res.send(page2);
 };
