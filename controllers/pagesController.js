@@ -1,8 +1,8 @@
-var pageModel = require('../models/pagesModel');
+var pageModel = require('../models/pagesModel.db');
 
 // Controller 內的 CRUD 方法
 exports.getAllPages = async (req, res) => {
-    const pages = pageModel.getAll();
+    const pages = await pageModel.getAll();
     res.send(pages);
 };
 
@@ -36,7 +36,7 @@ exports.createPage = async (req, res) => {
         url: req.body.url
     };
 
-    const page = pageModel.create(newPage);
+    const page = await pageModel.create(newPage);
 
     res.send(page);
 };
