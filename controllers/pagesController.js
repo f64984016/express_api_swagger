@@ -61,7 +61,7 @@ exports.putPage = async (req, res) => {
     // Get Obj
     const page1 = await pageModel.getById(id);
     // Check whether Obj exist or not
-    if (page.length != 1) {
+    if (page1.length != 1) {
         return res.status(404).send({error: '查無該筆資料'});
     }
     // Modify Obj
