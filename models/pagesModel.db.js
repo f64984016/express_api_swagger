@@ -1,15 +1,7 @@
-const { v4: uuidv4 } = require('uuid');
 const { MongoClient, ObjectId } = require('mongodb');
 
 class PageModel { 
   constructor() {
-    //
-    this.pages = [
-        {id: uuidv4(), 'name':'Home','url':'/'},
-        {id: uuidv4(), 'name':'MUI','url':'/mui'},
-        {id: uuidv4(), 'name':'Three','url':'/box_three'},
-        {id: uuidv4(), 'name':'Example','url':'/example'}
-    ];
     // Connection URL
     this.url = 'mongodb://root:P%40ssw0rd@172.17.223.192:27017/?authMechanism=DEFAULT';
     this.client = new MongoClient(this.url);
