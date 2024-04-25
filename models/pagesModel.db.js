@@ -72,11 +72,12 @@ class PageModel {
     console.log('Connected successfully to server');
     // get pages collection
     const collection = this.client.db(this.dbName).collection(this.collectionName);
+    console.log(collection);
     // delete one
     const deleteResult = await collection.deleteMany({ _id: new ObjectId(id) });
     console.log('Deleted documents =>', deleteResult);
     // Response
-    return deleteResult.deletedCount;
+    return deleteResult;
   }
 }
 

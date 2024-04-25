@@ -58,29 +58,36 @@ exports.putPage = async (req, res) => {
     }
     // Retrieval id from querystring
     const { id } = req.params;
-    // Get Obj
-    const page1 = await pageModel.getById(id);
     // Check whether Obj exist or not
-    if (page1.length != 1) {
+    if ((await pageModel.getById(id)).length != 1) {
         return res.status(404).send({error: '查無該筆資料'});
     }
     // Modify Obj
-    const page2 = await pageModel.put(id, req.body);
+    const documents = await pageModel.put(id, req.body);
     // Response
-    res.send(page2);
+    if(documents.modifiedCount == 1){
+        const page = await pageModel.getById(id);
+        res.status(200).send(page);
+    }else{
+        res.status(500).send({error: "internal error"});
+    }
 };
 
 exports.deletePage = async (req, res) => {
     // Retrieval id from querystring
     const { id } = req.params;
-    // Get Exist Obj
-    const page1 = await pageModel.getById(id);
     // Check whether Obj exist or not
-    if (page1.length != 1) {
+    if ((await pageModel.getById(id)).length != 1) {
         return res.status(404).send({error: '查無該筆資料'});
     } 
     // delete item from array
     const pageResult = await pageModel.delete(id);
+    console.log(pageResult);
     //Response
-    res.send({deleteCount: pageResult});
+    if(pageResult.deletedCount == 1){
+        const page = await pageModel.getById(id);
+        res.status(200).send();
+    }else{
+        res.status(500).send({error: "internal error"});
+    }
 };
