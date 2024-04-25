@@ -235,9 +235,9 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "id": {
+                  "_id": {
                     "type": "string",
-                    "example": "fda7cb56-84d0-4b3b-accf-8fdf1e56257d"
+                    "example": "6629b241a3a8650dee8dd635"
                   },
                   "name": {
                     "type": "string",
@@ -443,20 +443,7 @@
           "200": {
             "schema": {
               "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "example": "fda7cb56-84d0-4b3b-accf-8fdf1e56257d"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "Home"
-                },
-                "url": {
-                  "type": "string",
-                  "example": "/"
-                }
-              },
+              "properties": {},
               "xml": {
                 "name": "main"
               }
