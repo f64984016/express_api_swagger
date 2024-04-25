@@ -1,5 +1,4 @@
 var pageModel = require('../models/pagesModel.db');
-const initData = require('../models/pagesData');
 
 // Controller 內的 CRUD 方法
 exports.getAllPages = async (req, res) => {
