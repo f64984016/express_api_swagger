@@ -3,7 +3,7 @@ const { MongoClient, ObjectId } = require('mongodb');
 class PageModel { 
   constructor() {
     // Connection URL
-    this.url = 'mongodb://root:P%40ssw0rd@172.17.223.192:27017/?authMechanism=DEFAULT';
+    this.url = 'mongodb://root:P%40ssw0rd@mongo:27017/?authMechanism=DEFAULT';
     this.client = new MongoClient(this.url);
     // Database Name
     this.dbName = 'mytest';
